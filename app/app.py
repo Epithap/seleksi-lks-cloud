@@ -59,6 +59,9 @@ def init_db():
         app.logger.error(f"Gagal inisialisasi database: {e}")
 
 
+init_db()
+
+
 @app.route("/health")
 def health():
     """Endpoint ini dipakai oleh ALB Target Group Health Check."""
@@ -94,5 +97,4 @@ def index():
 
 
 if __name__ == "__main__":
-    init_db()
     app.run(host="0.0.0.0", port=5000)
