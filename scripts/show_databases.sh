@@ -2,9 +2,9 @@
 
 set -euo pipefail
 
-DB_HOST="akbar.c5tf3qtrvypl.us-east-1.rds.amazonaws.com"
-DB_USER="admin"
-DB_PASS="akbar123*"
+DB_HOST="CHANGE_ME_DB_HOST"
+DB_USER="CHANGE_ME_DB_USER"
+DB_PASS="CHANGE_ME_DB_PASSWORD"
 
 if ! command -v mysql >/dev/null 2>&1; then
   echo "mysql client belum ter-install. Install mysql atau mariadb client terlebih dahulu."
