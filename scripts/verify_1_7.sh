@@ -1,18 +1,11 @@
 #!/bin/bash
-# ============================================================
-# Script Verifikasi Otomatis - Materi 1 s/d 7
-# (EC2, Auto Scaling, ALB, RDS, S3, CloudWatch, SNS)
-#
-# Cara pakai: jalankan di AWS CloudShell
-#   bash verify_1_7.sh
-# ============================================================
-
 set -uo pipefail
+
+PREFIX="budi"
 
 echo "==================================================="
 echo " VERIFIKASI INFRASTRUKTUR AWS - MATERI 1-7"
 echo "==================================================="
-read -p "Masukkan prefix identitas kamu (contoh: budi): " PREFIX
 
 if [ -z "$PREFIX" ]; then
   echo "Prefix tidak boleh kosong. Keluar."

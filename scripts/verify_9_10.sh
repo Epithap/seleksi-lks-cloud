@@ -1,13 +1,4 @@
 #!/bin/bash
-# ============================================================
-# Panduan Verifikasi Manual - Materi 9 s/d 10
-# (GitHub Actions -> GHCR, Python/Flask)
-#
-# Ini BUKAN script otomatis satu-jalan seperti verify_1_7.sh.
-# Jalankan blok per blok secara manual sambil disaksikan penguji.
-# ============================================================
-
-# --- Ganti variabel ini sesuai punya masing-masing siswa ---
 PREFIX="budi"                          # prefix identitas siswa
 GHCR_OWNER="budi123"                   # username GitHub siswa
 GHCR_IMAGE="ghcr.io/${GHCR_OWNER}/flask-training-app"

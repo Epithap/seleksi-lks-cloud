@@ -20,8 +20,9 @@ dan **Appendix** pada dokumen soal.
 ## Sebelum mulai, siswa WAJIB mengganti:
 
 1. `PREFIX` di semua nama resource AWS (EC2, ASG, ALB, RDS, S3 bucket, alarm, SNS topic)
-   dengan identitas masing-masing, contoh: `budi`, `anisa123`, dst.
-2. `GHCR_OWNER`, `PREFIX`, `ALB_NAME` di bagian atas `scripts/verify_9_10.sh`.
+  dengan identitas masing-masing, contoh: `budi`, `anisa123`, dst.
+2. `PREFIX` di bagian atas `scripts/verify_1_7.sh`.
+3. `GHCR_OWNER`, `PREFIX`, `ALB_NAME` di bagian atas `scripts/verify_9_10.sh`.
 
 ## Catatan penting
 
