@@ -3,9 +3,6 @@ name: Build and Push to GHCR
 on:
   push:
     branches: [ "main" ]
-    paths:
-      - "app/**"
-      - ".github/workflows/deploy.yml"
 
 env:
   REGISTRY: ghcr.io
@@ -15,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write        # Wajib untuk push ke GHCR
+      packages: write
 
     steps:
       - name: Checkout code
@@ -31,20 +28,19 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata (tags, labels) for Docker
+      - name: Extract metadata (lowercase tag)
         id: meta
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ github.repository }}
           tags: |
-            type=sha,format=long
             type=raw,value=latest
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./app
-          file: ./app/Dockerfile
+          context: .               # Ubah ke ./app jika Dockerfile ada di dalam folder app
+          file: ./Dockerfile       # Ubah ke ./app/Dockerfile jika lokasi file berbeda
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
