@@ -1,7 +1,7 @@
 #!/bin/bash
 PREFIX="lutvi"                          # prefix identitas siswa
-GHCR_OWNER="budi123"                   # username GitHub siswa
-GHCR_IMAGE="ghcr.io/${GHCR_OWNER}/flask-training-app"
+GHCR_OWNER="Epithap"                   # username GitHub siswa
+GHCR_IMAGE="ghcr.io/${GHCR_OWNER}/seleksi-lks-cloud"
 ALB_NAME="${PREFIX}-alb"               # nama ALB dari materi 3
 
 
