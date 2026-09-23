@@ -1,11 +1,13 @@
 #!/bin/bash
 set -euo pipefail
 
+# Log semua output User Data ke /var/log/user-data.log (untuk debugging)
 exec > >(tee /var/log/user-data.log | logger -t user-data) 2>&1
 
 echo "=== [1/5] Update sistem & install Docker + cronie ==="
 dnf update -y
 
+# Deteksi OS: Amazon Linux vs RHEL, karena nama/repo paket docker beda
 . /etc/os-release
 OS_ID="${ID}"
 
@@ -69,12 +71,18 @@ chmod +x /opt/scripts/upload_log.sh
 
 echo "=== [4/5] Daftarkan cron job (tiap 5 menit) ==="
 CRON_ENTRY="*/5 * * * * /opt/scripts/upload_log.sh >> /var/log/upload_log_cron.log 2>&1"
+# FIX: tambahkan "|| true" setelah grep, karena saat crontab masih kosong
+# (instance baru), grep -v tidak menemukan match dan return exit code 1.
+# Dengan set -e + pipefail, exit code itu dianggap error dan menghentikan
+# subshell sebelum sempat menjalankan "echo ${CRON_ENTRY}", sehingga
+# seluruh script berhenti diam-diam di titik ini.
 ( crontab -l 2>/dev/null | grep -vF "/opt/scripts/upload_log.sh" || true; echo "${CRON_ENTRY}" ) | crontab -
 
 echo "=== [5/5] Cek status container & jalankan ==="
 CONTAINER_NAME="training-app"
 
 if docker ps -a --format '{{.Names}}' | grep -wq "${CONTAINER_NAME}"; then
+  # Container sudah ada (entah lagi jalan atau berhenti)
   if docker ps --format '{{.Names}}' | grep -wq "${CONTAINER_NAME}"; then
     echo "Container '${CONTAINER_NAME}' sudah jalan, tidak perlu diapa-apain."
   else
